@@ -8,7 +8,6 @@ RUN corepack enable
 
 # Copy root package files
 COPY package.json yarn.lock .yarnrc.yml ./
-COPY .yarn ./.yarn
 
 # Copy workspace package files
 COPY apps/client/package.json ./apps/client/
@@ -27,7 +26,6 @@ RUN corepack enable
 
 # Copy dependencies from deps stage
 COPY --from=deps /app/node_modules ./node_modules
-COPY --from=deps /app/.yarn ./.yarn
 COPY --from=deps /app/apps/client/node_modules ./apps/client/node_modules
 COPY --from=deps /app/packages ./packages
 
