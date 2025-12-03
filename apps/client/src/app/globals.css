@@ -1,0 +1,171 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+:root {
+  --background: #f3eee7;
+  --foreground: #313131;
+  --container: 90%;
+}
+
+.container {
+  max-width: 100%;
+  padding: 0 1rem;
+
+  @media (min-width: 768px) {
+    max-width: var(--container);
+    padding: 0 1rem;
+  }
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-helvetica-neue);
+  --font-mono: var(--font-helvetica-neue);
+  --font-serif: var(--font-silk-serif);
+  --font-serif-italic: var(--font-silk-serif-italic);
+  --container: var(--container);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-helvetica-neue);
+}
+
+/* Mobile menu toggle styles */
+#mobile-menu-toggle:checked ~ div .menu-icon-open {
+  display: none;
+}
+
+#mobile-menu-toggle:checked ~ div .menu-icon-close {
+  display: block;
+}
+
+/* Mobile menu animations */
+.mobile-menu {
+  display: none;
+  transition: all 0.3s ease-in-out;
+  max-height: 0;
+  overflow: hidden;
+}
+
+#mobile-menu-toggle:checked ~ div .mobile-menu {
+  display: flex !important;
+  max-height: 100vh;
+}
+
+/* Force hide mobile menu on large screens */
+@media (min-width: 1024px) {
+  .mobile-menu {
+    display: none !important;
+  }
+}
+
+@keyframes slideInFade {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.mobile-menu-item {
+  animation: slideInFade 0.4s ease-out forwards;
+  opacity: 0;
+}
+
+#mobile-menu-toggle:checked ~ div .mobile-menu-item {
+  animation: slideInFade 0.4s ease-out forwards;
+}
+
+/* Wedding carousel animations */
+@keyframes weddingSlideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes weddingSlideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes weddingSlideOutLeft {
+  from {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateX(-24px);
+  }
+}
+
+@keyframes weddingSlideOutRight {
+  from {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateX(24px);
+  }
+}
+
+.animate-wedding-in-right {
+  animation: weddingSlideInRight 0.45s ease both;
+}
+
+.animate-wedding-in-left {
+  animation: weddingSlideInLeft 0.45s ease both;
+}
+
+.animate-wedding-out-left {
+  animation: weddingSlideOutLeft 0.45s ease both;
+}
+
+.animate-wedding-out-right {
+  animation: weddingSlideOutRight 0.45s ease both;
+}
+
+/* Sliding strip animations for wedding center carousel */
+@keyframes weddingStripNext {
+  from {
+    transform: translateX(0%);
+  }
+  to {
+    transform: translateX(-100%);
+  }
+}
+
+@keyframes weddingStripPrev {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(0%);
+  }
+}
+
+.animate-wedding-strip-next {
+  animation: weddingStripNext 0.6s cubic-bezier(0.22, 0.61, 0.36, 1) both;
+}
+
+.animate-wedding-strip-prev {
+  animation: weddingStripPrev 0.6s cubic-bezier(0.22, 0.61, 0.36, 1) both;
+}

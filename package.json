@@ -1,0 +1,33 @@
+{
+  "name": "ManuMaharani",
+  "private": true,
+  "scripts": {
+    "build": "turbo run build",
+    "dev": "dotenv -e .env -- turbo run dev",
+    "lint": "turbo run lint",
+    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
+    "check-types": "turbo run check-types",
+    "db:generate": "dotenv -e .env -- yarn workspace @repo/db db:generate",
+    "db:push": "dotenv -e .env -- yarn workspace @repo/db db:push",
+    "db:studio": "dotenv -e .env -- yarn workspace @repo/db db:studio",
+    "db:migrate": "dotenv -e .env -- yarn workspace @repo/db db:migrate"
+  },
+  "devDependencies": {
+    "@types/node": "^22.15.3",
+    "dotenv-cli": "^10.0.0",
+    "prettier": "^3.6.2",
+    "turbo": "^2.5.8",
+    "typescript": "5.9.2"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "packageManager": "yarn@4.6.0",
+  "dependencies": {
+    "framer-motion": "^12.23.24"
+  }
+}
