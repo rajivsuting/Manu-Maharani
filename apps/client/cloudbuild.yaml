@@ -8,9 +8,9 @@ steps:
       - "-t"
       - "gcr.io/$PROJECT_ID/manumaharani-client:latest"
       - "-f"
-      - "./apps/client/Dockerfile"
+      - "apps/client/Dockerfile"
       - "."
-    dir: "."
+    dir: "/workspace"
 
   # Push the container image to Container Registry
   - name: "gcr.io/cloud-builders/docker"
