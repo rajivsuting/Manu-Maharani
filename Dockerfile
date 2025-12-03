@@ -27,11 +27,11 @@ RUN corepack enable
 # Copy dependencies from deps stage
 COPY --from=deps /app/node_modules ./node_modules
 COPY --from=deps /app/apps/client/node_modules ./apps/client/node_modules
-COPY --from=deps /app/packages ./packages
 
 # Copy source code
 COPY package.json yarn.lock .yarnrc.yml turbo.json ./
 COPY apps/client ./apps/client
+COPY packages ./packages
 
 # Set environment variables for build
 ENV NEXT_TELEMETRY_DISABLED=1
