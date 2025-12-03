@@ -40,9 +40,9 @@ COPY apps/client ./apps/client
 ENV NEXT_TELEMETRY_DISABLED=1
 ENV NODE_ENV=production
 
-# Build the client app from root workspace
-WORKDIR /app
-RUN yarn workspace client build
+# Build the client app directly with next build
+WORKDIR /app/apps/client
+RUN npx next build
 
 # Stage 3: Production image
 FROM node:20-alpine AS runner
