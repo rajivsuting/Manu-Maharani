@@ -14,6 +14,9 @@ COPY apps/client/package.json ./apps/client/
 COPY packages/eslint-config/package.json ./packages/eslint-config/
 COPY packages/typescript-config/package.json ./packages/typescript-config/
 
+# Copy packages source files (needed for workspace resolution)
+COPY packages ./packages
+
 # Install dependencies
 RUN yarn workspaces focus client
 
