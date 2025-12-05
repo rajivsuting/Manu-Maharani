@@ -52,10 +52,10 @@ ENV PORT=8080
 RUN addgroup --system --gid 1001 nodejs
 RUN adduser --system --uid 1001 nextjs
 
-# Copy necessary files from builder
-COPY --from=builder /app/apps/client/public ./public
-COPY --from=builder /app/apps/client/.next/standalone ./
-COPY --from=builder /app/apps/client/.next/static ./apps/client/.next/static
+# Copy necessary files from builder with correct ownership
+COPY --from=builder --chown=nextjs:nodejs /app/apps/client/public ./public
+COPY --from=builder --chown=nextjs:nodejs /app/apps/client/.next/standalone ./
+COPY --from=builder --chown=nextjs:nodejs /app/apps/client/.next/static ./apps/client/.next/static
 
 USER nextjs
 
