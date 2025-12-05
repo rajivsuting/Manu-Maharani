@@ -53,8 +53,11 @@ RUN addgroup --system --gid 1001 nodejs
 RUN adduser --system --uid 1001 nextjs
 
 # Copy necessary files from builder with correct ownership
-COPY --from=builder --chown=nextjs:nodejs /app/apps/client/public ./public
+# Copy standalone build first
 COPY --from=builder --chown=nextjs:nodejs /app/apps/client/.next/standalone ./
+# Copy public folder to the same location as server.js (apps/client/public)
+COPY --from=builder --chown=nextjs:nodejs /app/apps/client/public ./apps/client/public
+# Copy static files
 COPY --from=builder --chown=nextjs:nodejs /app/apps/client/.next/static ./apps/client/.next/static
 
 USER nextjs
