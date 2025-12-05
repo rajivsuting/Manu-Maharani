@@ -53,11 +53,17 @@ RUN addgroup --system --gid 1001 nodejs
 RUN adduser --system --uid 1001 nextjs
 
 # Copy necessary files from builder with correct ownership
-# Copy standalone build first
+# Copy standalone build first (this creates the directory structure)
 COPY --from=builder --chown=nextjs:nodejs /app/apps/client/.next/standalone ./
-# Copy public folder to the same location as server.js (apps/client/public)
+
+# Copy public folder to the same location as server.js (required for Next.js standalone)
+# Since server.js is at apps/client/server.js, public should be at apps/client/public
 COPY --from=builder --chown=nextjs:nodejs /app/apps/client/public ./apps/client/public
-# Copy static files
+
+# Also copy public to root as fallback (some Next.js versions may look here)
+COPY --from=builder --chown=nextjs:nodejs /app/apps/client/public ./public
+
+# Copy static files  
 COPY --from=builder --chown=nextjs:nodejs /app/apps/client/.next/static ./apps/client/.next/static
 
 USER nextjs
